@@ -1,9 +1,11 @@
-__pycache__/
+__pycache__
 *.pyc
 *.pyo
 *.pyd
 .env
-venv/
-.env/
-*.log
-.DS_Store.idea/
+venv
+.git
+.gitignore
+*.zip
+*.tar
+data/
