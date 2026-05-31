@@ -22,9 +22,6 @@ async def predict(file: UploadFile = File(...)):
         outputs = model(input_tensor)
 
     probs = torch.nn.functional.softmax(outputs[0], dim=0)
-    # top_prob, top_catid = torch.topk(probs, 1)
-    # label = weights.meta["categories"][top_catid.item()]
-    # return {"label": label, "confidence": float(top_prob)}
 
 
     top_probs, top_ids = torch.topk(probs, 2)

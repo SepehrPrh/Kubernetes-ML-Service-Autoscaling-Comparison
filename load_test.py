@@ -3,40 +3,40 @@ import time
 import os
 import statistics
 import csv
+import random
 
 URL = "http://192.168.49.2:30512/predict"
 IMG_DIR = "imagenet-sample-images"
 
 latencies_over_time = []
 latencies = []
-
+start_global = time.time()
 files = [
     os.path.join(IMG_DIR, f)
     for f in os.listdir(IMG_DIR)
     if f.lower().endswith((".jpg", ".jpeg", ".png"))
 ]
 
-qps = 5
+qps = 100
+
 delay = 1 / qps
 
-for i in range(200):
-    img_path = files[i % len(files)]
+# for i in range(200):
+img_path = random.choice(files)
+start = time.time()
+with open(img_path, "rb") as f:
+    res = requests.post(URL, files={"file": f})
+latency = time.time() - start
 
-    start = time.time()
-    with open(img_path, "rb") as f:
-        res = requests.post(URL, files={"file": f})
-    latency = time.time() - start
+timestamp = time.time() - start_global
+# ✅ FIX 1
+latencies.append(latency)
 
-    timestamp = time.time()
+latencies_over_time.append((timestamp, latency))
 
-    # ✅ FIX 1
-    latencies.append(latency)
+print(f" {res.status_code}, latency={latency:.3f}s")
 
-    latencies_over_time.append((timestamp, latency))
-
-    print(f"{i}: {res.status_code}, latency={latency:.3f}s")
-
-    time.sleep(delay)
+    # time.sleep(delay)
 
 # ---- results ----
 print("\n--- RESULTS ---")

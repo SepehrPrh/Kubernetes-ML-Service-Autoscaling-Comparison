@@ -1,5 +1,6 @@
 __pycache__
 *.pyc
+experiment-results
 *.pyo
 *.pyd
 .env
@@ -10,3 +11,4 @@ venv
 *.tar
 data/
 .idea/
+imagenet-sample-images

@@ -42,10 +42,14 @@ class MyLoadTester(BarAzmoon):
 
 
 # workload = requests per second
-workload = [5, 10, 20, 40, 60, 40, 20, 10]
+with open("workload.txt", "r") as f:
+    content = f.read()
+
+
+workload_list = [int(x) for x in content.split()]
 if __name__ == "__main__":
     tester = MyLoadTester(
-        workload=workload,
+        workload=workload_list,
         endpoint=URL,
         http_method="post"
     )
