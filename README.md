@@ -176,6 +176,9 @@ Additional features:
 
 ![Replicas](plots/replicas.png)
 
+### Overall Comparison
+
+![Overall Comparison](plots/comparison_table.png)
 ---
 
 ## Conclusion
